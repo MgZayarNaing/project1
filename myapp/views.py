@@ -1,7 +1,23 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Task
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 # Create your views here.
+
+def login_views(request):
+    if request.method =="GET":
+        return render(request,'login.html')
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            messages.success(request, "You are now logged in as "+ username )
+            return redirect('/myapp/task_list/')
+        else:
+            messages.error(request, "Invalid username or password")
+            return redirect('login')
 
 def task_list(request):
     tasks = Task.objects.all()

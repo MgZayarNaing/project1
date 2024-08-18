@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+
+    <div>
+        {% if messages %}
+
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        {% endfor %}
+        {% endif %}
+
+        <form action="/login/" method="POST">
+            {% csrf_token %}
+
+            <label for="form-lable">Username</label>
+            <input type="text" id="form-lable" name="username" placeholder="Enter your username" />
+
+            <label for="form-lable">Password</label>
+            <input type="text" id="form-lable" name="password" placeholder="Enter your password" />
+
+            <button type="submit" class="btn btn-primary">Login</button>
+
+            
+        </form>
+
+
+    </div>
+</body>
+
+</html>
