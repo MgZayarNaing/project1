@@ -1,0 +1,10 @@
+<h1>Task Detail</h1>
+
+<p><strong>Title:</strong> {{ task.title }}</p>
+<p><strong>Description:</strong> {{ task.description }}</p>
+<p><strong>Created At:</strong> {{ task.created_at|date:"Y-m-d H:i:s" }}</p>
+<p><strong>Due Date:</strong> {{ task.due_date|date:"Y-m-d H:i:s" }}</p>
+<p><strong>Completed:</strong> {{ task.is_completed|yesno:"Yes,No" }}</p>
+
+<a href="{% url 'task_update' task.id %}">Edit Task</a>
+<a href="{% url 'task_list' %}">Back to Task List</a>

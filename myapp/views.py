@@ -53,3 +53,26 @@ def delete_task(request, task_id):
         return redirect('task_list')
 
     return render(request, 'delete_task.html', {'task': task})
+
+
+@login_required(login_url='login')
+def task_update(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+
+    if request.method == 'POST':
+        task.title = request.POST.get('title')
+        task.description = request.POST.get('description')
+        task.due_date = request.POST.get('due_date')
+        task.is_completed = request.POST.get('is_completed') == 'on'
+        
+        task.save()
+        messages.success(request, 'Task updated successfully')
+        return redirect('task_list')
+
+    return render(request, 'task_form.html', {'task': task})
+
+
+@login_required(login_url='login')
+def task_detail(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    return render(request, 'task_detail.html', {'task': task})

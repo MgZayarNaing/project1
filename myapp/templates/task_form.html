@@ -5,7 +5,7 @@
 {% load static %}
 
 <h1> Task Create</h1>
-<form method="post">
+<!-- <form method="post">
     {% csrf_token %}
     <label for="title">Title:</label>
     <input type="text" id="title" name="title"  required><br>
@@ -20,7 +20,26 @@
     <input type="checkbox" id="is_completed" name="is_completed" {% if task.is_completed %}checked{% endif %}><br>
 
     <button type="submit"> Task Create</button>
+</form> -->
+
+
+<form method="post">
+    {% csrf_token %}
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" value="{{ task.title }}" required><br><br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description">{{ task.description }}</textarea><br><br>
+
+    <label for="due_date">Due Date:</label>
+    <input type="date" id="due_date" name="due_date" value="{{ task.due_date|date:"Y-m-d" }}"><br><br>
+
+    <label for="is_completed">Completed:</label>
+    <input type="checkbox" id="is_completed" name="is_completed" {% if task.is_completed %}checked{% endif %}><br><br>
+
+    <button type="submit">Save</button>
 </form>
+
 <a href="{% url 'task_list' %}">Back to Task List</a>
 <!-- <a href="/myapp/task_list/">Back to Task List</a> -->
 
